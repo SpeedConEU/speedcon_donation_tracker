@@ -5,6 +5,5 @@ from django.utils.translation import gettext_lazy as _
 def validate_positive(value):
     if value < 0:
         raise ValidationError(
-            _('%(value) can\'t be smaller than zero'),
-            params={'value': value}
+            _("%(value) can't be smaller than zero"), params={"value": value}
         )
