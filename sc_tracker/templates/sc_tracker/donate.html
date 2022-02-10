@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donate to {{ marathon.name }}</title>
+</head>
+<body>
+<h1>
+    Donate to {{ marathon.name }}
+    {% if is_test %}
+        <b style="color: red; align-self: baseline">(PAYPAL TEST)</b>
+    {% endif %}
+</h1>
+{% if marathon.recipient_name %}
+    <h2>100% of your donation goes directly to {{ marathon.recipient_name }}</h2>
+{% else %}
+    <h2>100% of your donation goes directly to the receiver</h2>
+{% endif %}
+
+<form action="{% url "sc_tracker:donate" marathon.slug %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Donate">
+</form>
+</body>
+</html>

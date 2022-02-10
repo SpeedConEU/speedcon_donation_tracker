@@ -26,7 +26,11 @@ SECRET_KEY = "django-insecure-s2tp^!inbj5w(ypy8hg#*2xc5d0w$@7imf6+tnhg3z)hr7c-mh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "53db-2001-9b0-212-ac00-90fa-cc03-5c95-b100.ngrok.io",
+]
 
 # Application definition
 
@@ -108,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Berlin"
 
 USE_I18N = True
 
@@ -123,3 +127,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+BRANDING = {"name": "Speedcon"}

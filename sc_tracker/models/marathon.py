@@ -10,6 +10,7 @@ class Marathon(models.Model):
     SEK = "SEK"
     CURRENCY_CHOICES = [(EURO, "Euro"), (USD, "U.S. Dollar"), (SEK, "Swedish Krona")]
 
+    start_time = models.DateTimeField()
     name = models.CharField(max_length=100, help_text="Name of the Marathon")
     slug = models.SlugField(max_length=20, unique=True, allow_unicode=False)
     recipient_name = models.CharField(
@@ -21,3 +22,6 @@ class Marathon(models.Model):
     )
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=EURO)
     accept_donations = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
