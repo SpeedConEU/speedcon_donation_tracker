@@ -1,6 +1,7 @@
 import decimal
 
 from django.db import models
+from django.db.models import Sum
 
 
 class Marathon(models.Model):
@@ -33,13 +34,11 @@ class Marathon(models.Model):
     def donations_get_total(self):
         from .donation import Donation
 
-        # FIXME: this can probably be done better
-        return sum(
-            donation.amount
-            for donation in self.donation_set.filter(
-                transaction_state=Donation.COMPLETED
-            )
-        )
+        donation_sum = self.donation_set.filter(
+            transaction_state=Donation.COMPLETED
+        ).aggregate(Sum("amount"))["amount__sum"]
+
+        return donation_sum if donation_sum else decimal.Decimal(0)
 
     def __str__(self):
         return self.name

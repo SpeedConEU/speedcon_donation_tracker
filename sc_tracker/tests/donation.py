@@ -24,7 +24,7 @@ class DonationTestCase(TestCase):
             event=self.marathon, amount=decimal.Decimal(1.0)
         )
 
-        ipn = PayPalIPN.objects.create(
+        self.ipn = PayPalIPN.objects.create(
             business="example@example.com",
             receiver_email="example@example.com",
             txn_id="abc",
@@ -34,9 +34,9 @@ class DonationTestCase(TestCase):
             payment_status=ST_PP_COMPLETED,
         )
 
-        handle_valid_ipn(ipn)
-
-    def test_valid_donation(self):
+    def test_donations_get_total(self):
+        self.assertEqual(self.marathon.donations_get_total(), 0)
+        handle_valid_ipn(self.ipn)
         self.assertEqual(
             Marathon.objects.get(slug__exact="tc2022").donations_get_total(), 1.0
         )
