@@ -41,6 +41,7 @@ CSRF_TRUSTED_ORIGINS = [
 # Application definition
 
 INSTALLED_APPS = [
+    "adminsortable2",
     "paypal.standard.ipn",
     "sc_tracker.apps.ScTrackerConfig",
     "django.contrib.admin",
