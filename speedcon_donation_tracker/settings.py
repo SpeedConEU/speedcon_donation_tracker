@@ -16,6 +16,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 PAYPAL_TEST = True
+DOMAIN = "70c4-98-128-228-36.ngrok.io"
+BRANDING = {"name": "Speedcon"}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -29,7 +31,11 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "53db-2001-9b0-212-ac00-90fa-cc03-5c95-b100.ngrok.io",
+    DOMAIN,
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    f"https://{DOMAIN}",
 ]
 
 # Application definition
@@ -127,5 +133,3 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-BRANDING = {"name": "Speedcon"}

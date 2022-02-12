@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-from paypal.standard.ipn.signals import valid_ipn_received
+from paypal.standard.ipn.signals import valid_ipn_received, invalid_ipn_received
 
 
 class ScTrackerConfig(AppConfig):
@@ -10,3 +10,4 @@ class ScTrackerConfig(AppConfig):
         from .hooks import handle_valid_ipn
 
         valid_ipn_received.connect(handle_valid_ipn)
+        invalid_ipn_received.connect(handle_valid_ipn)

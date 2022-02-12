@@ -1,3 +1,5 @@
+{% load money_extras %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +8,9 @@
 </head>
 <body>
 <h1>{{ branding.name }} Donation Tracker</h1>
+{% if marathon %}
+    <h2>Donations for {{ marathon.name }}: {{ marathon.donations_get_total|money }}</h2>
+{% endif %}
 <h2>Latest Donations</h2>
 <h2>Upcoming Runs</h2>
 </body>

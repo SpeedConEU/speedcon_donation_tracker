@@ -22,6 +22,24 @@ class Marathon(models.Model):
     )
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=EURO)
     accept_donations = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    @staticmethod
+    def get_latest_marathon():
+        marathon = Marathon.objects.order_by("-start_time")
+        return marathon[0] if len(marathon) != 0 else None
+
+    # returns the donation total as a simple decimal number
+    def donations_get_total(self):
+        from .donation import Donation
+
+        # FIXME: this can probably be done better
+        return sum(
+            donation.amount
+            for donation in self.donation_set.filter(
+                transaction_state=Donation.COMPLETED
+            )
+        )
 
     def __str__(self):
         return self.name

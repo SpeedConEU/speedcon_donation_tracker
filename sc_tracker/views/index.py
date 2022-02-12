@@ -2,12 +2,16 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
 
-
-# Create your views here.
+from ..models import Marathon
 
 
 def index(request):
-    return render(request, "sc_tracker/index.html", {"branding": settings.BRANDING})
+    marathon = Marathon.get_latest_marathon()
+    return render(
+        request,
+        "sc_tracker/index.html",
+        {"branding": settings.BRANDING, "marathon": marathon},
+    )
 
 
 def paypal_return(request):
